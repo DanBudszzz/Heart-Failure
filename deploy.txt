@@ -1,0 +1,45 @@
+Deployment Instructions for Heart Failure Pathophysiology Explorer
+===============================================================
+
+**Troubleshooting: The "White Screen" Issue on Deployment**
+
+You may have noticed that deploying the files directly results in a blank white screen. This happens because the application's source code is written in `.tsx` files, which use JSX syntax (e.g., `<App />`). Web browsers do not understand JSX natively and will throw an error, stopping the app from loading.
+
+To fix this without a complex build process, we use an in-browser transpiler called Babel. It converts the JSX code into regular JavaScript on-the-fly, right in the user's browser. The `index.html` file has been updated to include Babel and tell it to process our main script file.
+
+While this method is perfect for demonstrations and simple projects, for larger, performance-critical applications, it's recommended to use a build tool like Vite or Parcel. A build tool transpiles the code once before deployment, so the user's browser receives an optimized, ready-to-run JavaScript file, resulting in faster load times.
+
+---
+
+**Deployment Process**
+
+This is a static web application. Because it now uses an in-browser transpiler for JSX and CDNs for React and Tailwind CSS, you can host it on any service that supports static file hosting. The methods below will now work correctly.
+
+--- Option 1: Netlify or Vercel (Easiest Method) ---
+
+This method is great for quick, hassle-free deployments.
+
+1.  **Create a ZIP file:** Compress all the project files and folders (`index.html`, `index.tsx`, `App.tsx`, `metadata.json`, `types.ts`, `constants.ts`, and the `components/` directory) into a single ZIP file.
+2.  **Sign up:** Create a free account at Netlify (https://www.netlify.com/) or Vercel (https://vercel.com/).
+3.  **Deploy:** In your dashboard, find the option to deploy a new site. Most services have a section where you can simply drag and drop your ZIP file.
+4.  **Done:** The service will automatically unzip and deploy your site. You won't need to configure any build commands or specify a publish directory. Your site will be live at a provided URL in under a minute.
+
+--- Option 2: GitHub Pages ---
+
+This is a great free option if you are already using GitHub to store your code.
+
+1.  **Create a Repository:** Create a new repository on GitHub (https://github.com/).
+2.  **Upload Files:** Push all the project files to this new repository. You can do this using `git` commands or by using the "Add file" -> "Upload files" button on the repository's main page.
+3.  **Enable Pages:**
+    *   Go to your repository's "Settings" tab.
+    *   In the left sidebar, click on "Pages".
+    *   Under "Build and deployment", for the "Source", select "Deploy from a branch".
+4.  **Configure:**
+    *   Choose the branch you uploaded your files to (e.g., `main`).
+    *   Leave the folder as "/ (root)".
+    *   Click "Save".
+5.  **Done:** GitHub will start deploying your site. It might take a few minutes. The URL for your live site will be displayed on this same page once it's ready.
+
+--- Option 3: Other Static Hosts ---
+
+The process is similar for other services like Cloudflare Pages, AWS S3, or Firebase Hosting. The key concept is that you are simply uploading the existing files to be served directly to users.
