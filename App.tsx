@@ -3,7 +3,7 @@ import React, { useState, useMemo } from 'react';
 import HeartFailureDiagram from './components/HeartFailureDiagram';
 import InfoPanel from './components/InfoPanel';
 import Legend from './components/Legend';
-import { DIAGRAM_NODES, DIAGRAM_CONNECTIONS, CATEGORIES } from './constants';
+import { DIAGRAM_NODES, DIAGRAM_CONNECTIONS, CATEGORIES } from './components/constants';
 import type { DiagramNode } from './types';
 
 const App: React.FC = () => {

@@ -1,4 +1,4 @@
-import { CategoryId, DiagramNode, DiagramConnection, Category } from './types';
+import { CategoryId, DiagramNode, DiagramConnection, Category } from '../types';
 
 export const CATEGORIES: Category[] = [
   { id: CategoryId.RISK_FACTORS, name: 'Risk Factors', color: 'bg-gray-500', textColor: 'text-white' },
