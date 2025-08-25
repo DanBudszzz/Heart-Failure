@@ -1,5 +1,5 @@
-Deployment Instructions for Heart Failure Pathophysiology Explorer
-===============================================================
+Deployment Instructions for Interactive Heart Failure Pathophysiology
+=====================================================================
 
 **Troubleshooting: The "White Screen" Issue on Deployment**
 

@@ -1,5 +1,5 @@
 {
-  "name": "Heart Failure Pathophysiology Explorer",
-  "description": "An interactive diagram illustrating the pathophysiology of heart failure and its influence on non-pharmacological and pharmacological interventions. Click on elements to learn more.",
+  "name": "Interactive Heart Failure Pathophysiology",
+  "description": "An interactive diagram illustrating the pathophysiology of heart failure, from risk factors to clinical management.",
   "requestFramePermissions": []
 }

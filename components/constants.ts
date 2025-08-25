@@ -1,285 +1,194 @@
+
 import { CategoryId, DiagramNode, DiagramConnection, Category } from '../types';
 
 export const CATEGORIES: Category[] = [
-  { id: CategoryId.RISK_FACTORS, name: 'Risk Factors', color: 'bg-gray-500', textColor: 'text-white' },
-  { id: CategoryId.INITIAL_INJURY, name: 'Initial Injury / Cause', color: 'bg-red-600', textColor: 'text-white' },
-  { id: CategoryId.PATHOPHYSIOLOGY, name: 'Core Pathophysiology', color: 'bg-orange-500', textColor: 'text-white' },
-  { id: CategoryId.COMPENSATORY_MECHANISM, name: 'Compensatory Mechanisms', color: 'bg-blue-600', textColor: 'text-white' },
-  { id: CategoryId.COUNTER_REGULATORY, name: 'Counter-Regulatory', color: 'bg-green-500', textColor: 'text-white' },
-  { id: CategoryId.MALADAPTIVE_OUTCOME, name: 'Maladaptive Outcomes', color: 'bg-purple-700', textColor: 'text-white' },
-  { id: CategoryId.SYMPTOMS, name: 'Clinical Manifestations', color: 'bg-teal-600', textColor: 'text-white' },
+  { id: CategoryId.FACTORS, name: 'Risk Factors', color: 'bg-orange-200', textColor: 'text-slate-800' },
+  { id: CategoryId.PROCESS, name: 'Pathophysiological Process', color: 'bg-white', textColor: 'text-slate-800' },
+  { id: CategoryId.SIGNS_SYMPTOMS, name: 'Clinical Signs & Symptoms', color: 'bg-red-500', textColor: 'text-white' },
+  { id: CategoryId.MANAGEMENT, name: 'Pharmacological Mgt.', color: 'bg-amber-400', textColor: 'text-slate-800' },
+  { id: CategoryId.NON_PHARM_MANAGEMENT, name: 'Non-Pharmacological Mgt.', color: 'bg-cyan-400', textColor: 'text-slate-800' },
+  { id: CategoryId.POSITIVE_OUTCOMES, name: 'Positive Outcomes', color: 'bg-emerald-200', textColor: 'text-slate-800' },
+  { id: CategoryId.NEGATIVE_OUTCOMES, name: 'Disease Progression', color: 'bg-slate-300', textColor: 'text-slate-800' },
 ];
 
 export const DIAGRAM_NODES: DiagramNode[] = [
-  // ROW 1: Risk Factors
+  // Factors
   {
-    id: 'non-modifiable-rf',
-    label: ['Non-Modifiable', 'Risk Factors'],
-    examples: ['Advancing Age', 'Male Sex', 'Genetics/Family Hx'],
-    x: 400, y: 10, width: 170, height: 135,
-    category: CategoryId.RISK_FACTORS,
-    explanation: 'These are intrinsic risk factors that cannot be altered, establishing a baseline susceptibility. Key examples include advancing age, associated with increased cardiac stiffness and reduced physiological reserve; male sex (though post-menopausal women have a similar risk); and a direct family history of cardiomyopathy, which may indicate a genetic predisposition (e.g., mutations in titin, myosin heavy chain).',
-    interventions: { pharmacological: [], nonPharmacological: [{ title: 'Genetic Counseling & Family Screening', description: 'For patients with suspected inherited cardiomyopathy (e.g., hypertrophic cardiomyopathy, arrhythmogenic right ventricular cardiomyopathy), genetic testing can confirm the diagnosis, identify at-risk family members, and guide management decisions, such as implantable defibrillator placement.' }] }
+    id: 'predisposing-factors',
+    label: ['Predisposing Factors', '(Chronic Conditions)', '• Coronary Artery Disease', '• Hypertension', '• Valvular Disease', '• Diabetes Mellitus'],
+    x: 20, y: 20, width: 380, height: 160,
+    category: CategoryId.FACTORS,
+    explanation: 'Long-term conditions that structurally or functionally impair the heart over time, setting the stage for heart failure. These factors weaken the heart muscle or increase its chronic workload.'
   },
   {
-    id: 'modifiable-rf',
-    label: ['Modifiable', 'Risk Factors'],
-    examples: ['Hypertension', 'Coronary Artery Disease', 'Diabetes Mellitus', 'Obesity, Smoking'],
-    x: 1000, y: 10, width: 170, height: 135,
-    category: CategoryId.RISK_FACTORS,
-    explanation: 'These factors represent the primary opportunity for heart failure prevention. Chronic hypertension exerts excessive pressure load, leading to left ventricular hypertrophy. Coronary artery disease (CAD) leads to ischemia and infarction. Diabetes mellitus accelerates atherosclerosis and can cause a specific diabetic cardiomyopathy. Obesity, smoking, and a sedentary lifestyle contribute through inflammation, metabolic stress, and direct cardiac strain. Aggressive management is paramount.',
-    interventions: {
-      pharmacological: [
-        { title: 'Antihypertensives (e.g., ACEi, ARBs)', description: 'Controlling blood pressure to a target of <130/80 mmHg is crucial to reduce the chronic strain that leads to left ventricular hypertrophy and eventual failure.' },
-        { title: 'Statins & Antiplatelets', description: 'For CAD, statins lower LDL cholesterol to stabilize atherosclerotic plaques, while antiplatelets like aspirin prevent thrombotic events.' },
-        { title: 'Glycemic Control (e.g., SGLT2i, GLP-1 RA)', description: 'Modern diabetes drugs not only control blood sugar but have demonstrated direct cardiovascular benefits, reducing the risk of heart failure hospitalizations.' },
-      ],
-      nonPharmacological: [{ title: 'Therapeutic Lifestyle Changes (TLC)', description: 'A cornerstone of prevention involving a heart-healthy diet (DASH, Mediterranean), achieving a healthy weight (BMI <25), smoking cessation, and engaging in at least 150 minutes of moderate-intensity exercise per week.' }]
-    }
+    id: 'precipitating-factors',
+    label: ['Precipitating Factors', '(Acute Triggers - "FAILURE")', '• Forgot Meds / Non-compliance', '• Arrhythmia / Anemia', '• Ischemia / Infection', '• Lifestyle (↑ Salt/Fluid)', '• Uncontrolled Hypertension', '• Renal Failure / Embolism'],
+    x: 560, y: 20, width: 380, height: 180,
+    category: CategoryId.FACTORS,
+    explanation: 'Acute events or conditions that place new, sudden stress on an already compromised heart, often leading to a rapid worsening of symptoms (acute decompensation). The "FAILURE" mnemonic is often used to remember these.'
   },
-  // ROW 2: Initial Injury
+
+  // Core Pathophysiology
   {
-    id: 'initial-injury',
-    label: ['Initial Myocardial', 'Injury'],
-    examples: ['Myocardial Infarction', 'Valvular Disease', 'Toxins (e.g., Alcohol)', 'Myocarditis'],
-    x: 700, y: 175, width: 170, height: 135,
-    category: CategoryId.INITIAL_INJURY,
-    explanation: 'This is the precipitating event that impairs the heart\'s structure or function. It can be an acute event, like a myocardial infarction (heart attack) causing abrupt death of cardiomyocytes, or a chronic insult, like valvular disease causing persistent volume/pressure overload. Other causes include direct toxins (e.g., excessive alcohol, certain chemotherapy agents like doxorubicin), viral myocarditis, or the manifestation of a genetic cardiomyopathy.',
-    interventions: {
-      pharmacological: [
-        { title: 'Reperfusion Therapy (MI)', description: 'In an acute heart attack, the immediate goal is to restore blood flow to the ischemic myocardium. This is done via percutaneous coronary intervention (PCI) with stenting or, if unavailable, thrombolytic (clot-busting) drugs. Time is muscle; the faster reperfusion occurs, the more heart muscle is salvaged.' },
-      ],
-      nonPharmacological: [
-        { title: 'Surgical/Transcatheter Valve Repair/Replacement', description: 'Correcting a severely stenotic (narrowed) or regurgitant (leaky) valve eliminates the hemodynamic stressor, allowing the heart to potentially recover or preventing further deterioration.' },
-      ],
-    },
+    id: 'myocardial-injury',
+    label: ['Initial Myocardial Injury', 'or Stress'],
+    x: 280, y: 240, width: 380, height: 70,
+    category: CategoryId.PROCESS,
+    explanation: 'An event or chronic condition that impairs the heart\'s ability to pump blood effectively. This can be a direct injury (e.g., heart attack) or the cumulative effect of chronic factors (e.g., hypertension). This leads to **systolic dysfunction** (impaired contraction, causing HFrEF) or **diastolic dysfunction** (impaired relaxation/filling, causing HFpEF). This diagram primarily illustrates the HFrEF pathway.'
   },
-  // ROW 3: Core Pathophysiology
   {
     id: 'decreased-co',
-    label: ['Decreased', 'Cardiac Output'],
-    x: 700, y: 340, width: 170, height: 60,
-    category: CategoryId.PATHOPHYSIOLOGY,
-    explanation: 'The immediate hemodynamic consequence of myocardial injury. Cardiac output (Heart Rate x Stroke Volume) falls because the damaged ventricle cannot pump effectively (reduced stroke volume). The body\'s organ systems, particularly the kidneys and brain, sense this reduction in blood flow (hypoperfusion). This is interpreted as a critical threat, triggering a cascade of powerful, evolutionarily ancient compensatory mechanisms designed to maintain blood pressure and perfusion in the short term.',
-    interventions: {
-      pharmacological: [
-        { title: 'Positive Inotropes (Dobutamine, Milrinone)', description: 'Used only in acute, severe situations like cardiogenic shock. They directly increase myocardial contractility to boost cardiac output. **Scenario where they are harmful:** Long-term use increases mortality. They significantly raise myocardial oxygen consumption and can provoke life-threatening arrhythmias. They are a temporary bridge, not a chronic solution.' },
-      ],
-      nonPharmacological: [
-        { title: 'Cardiac Resynchronization Therapy (CRT)', description: 'In patients with a wide QRS (e.g., Left Bundle Branch Block), dyssynchronous contraction wastes energy and worsens output. A CRT (biventricular) pacemaker paces both ventricles simultaneously, improving coordination and efficiency, thereby increasing cardiac output.' },
-      ],
-    },
+    label: ['Decreased Cardiac Output', '& Blood Pressure'],
+    x: 280, y: 340, width: 380, height: 70,
+    category: CategoryId.PROCESS,
+    explanation: 'The weakened heart pumps less blood out to the body, leading to a drop in cardiac output and systemic blood pressure. The body perceives this as a state of circulatory collapse and activates compensatory mechanisms.'
   },
-  // ROW 4: Compensatory and Counter-Regulatory
   {
     id: 'sns-activation',
-    label: ['Sympathetic Nervous', 'System (SNS) Activation'],
-    x: 100, y: 430, width: 180, height: 60,
-    category: CategoryId.COMPENSATORY_MECHANISM,
-    explanation: 'Baroreceptors in the aortic arch and carotid sinuses detect low blood pressure, triggering a massive release of catecholamines (norepinephrine, epinephrine). This increases heart rate, enhances contractility, and causes potent peripheral vasoconstriction to divert blood to core organs. While life-saving in acute blood loss, chronic activation is highly toxic, increasing myocardial oxygen demand, promoting arrhythmias, and directly damaging cardiomyocytes.',
-    interventions: {
-      pharmacological: [
-        { title: 'Guideline-Directed Beta-Blockers (e.g., Metoprolol Succinate, Carvedilol, Bisoprolol)', description: 'A cornerstone of HFrEF therapy. They block beta-adrenergic receptors on the heart, protecting it from chronic catecholamine toxicity, slowing the heart rate to improve diastolic filling time, and helping reverse remodeling. **Scenario where they may not work or be harmful:** They must be initiated "low and slow" in stable, euvolemic patients. Giving them to a patient in acute decompensated heart failure with severe fluid overload and low output can precipitate cardiogenic shock due to their negative inotropic effects. They are contraindicated in symptomatic bradycardia or high-degree AV block.' },
-      ],
-      nonPharmacological: []
-    }
+    label: ['Sympathetic Nervous System', '(SNS) Activation', '• ↑ Heart Rate & Contractility', '• Vasoconstriction'],
+    x: 20, y: 450, width: 280, height: 110,
+    category: CategoryId.PROCESS,
+    explanation: 'The body\'s "fight or flight" response is triggered to maintain blood pressure. It increases heart rate and the force of contraction, and constricts peripheral blood vessels. While helpful initially, this significantly increases the heart\'s workload and oxygen demand long-term. This harmful effect is targeted by **Beta-blocker** medications.'
   },
   {
-    id: 'natriuretic-peptides',
-    label: ['Natriuretic Peptide', 'Release (ANP, BNP)'],
-    x: 700, y: 430, width: 180, height: 60,
-    category: CategoryId.COUNTER_REGULATORY,
-    explanation: 'This is the body\'s "braking" system. In response to ventricular stretch from high volume and pressure, the heart releases B-type Natriuretic Peptide (BNP) and Atrial Natriuretic Peptide (ANP). These beneficial hormones promote vasodilation and natriuresis/diuresis (excretion of salt and water by the kidneys), directly counteracting the harmful effects of the RAAS and SNS. In chronic HF, this protective system is overwhelmed by the compensatory mechanisms.',
-    interventions: {
-      pharmacological: [
-        { title: 'ARNI (Angiotensin Receptor-Neprilysin Inhibitor - Sacubitril/Valsartan)', description: 'A breakthrough therapy. The valsartan blocks the RAAS, while sacubitril inhibits neprilysin, the enzyme that degrades natriuretic peptides. This "dual-mechanism" approach simultaneously blocks the bad system and boosts the good system, proving superior to RAAS inhibition alone in reducing mortality and hospitalization.' },
-      ],
-      nonPharmacological: []
-    }
+    id: 'frank-starling-mechanism',
+    label: ['Frank-Starling', 'Mechanism'],
+    x: 330, y: 450, width: 280, height: 110,
+    category: CategoryId.PROCESS,
+    explanation: 'Increased filling volumes dilate the heart, enhancing contractility and stroke volume. Initially, this helps maintain cardiac output. However, this dilation comes at the expense of increased wall tension and higher oxygen demand on an already compromised myocardium, eventually contributing to worsening failure.'
   },
   {
-    id: 'raas-adh-activation',
-    label: ['RAAS & Vasopressin', '(ADH) Activation'],
-    x: 1300, y: 430, width: 180, height: 60,
-    category: CategoryId.COMPENSATORY_MECHANISM,
-    explanation: 'Decreased blood flow to the kidneys is a powerful stimulus for the Renin-Angiotensin-Aldosterone System (RAAS). Angiotensin II is a potent vasoconstrictor and stimulates the release of aldosterone, which causes the kidneys to retain sodium and water. Concurrently, non-osmotic stimuli trigger vasopressin (ADH) release, promoting free water retention. The net effect is an increase in blood volume and pressure, which severely exacerbates cardiac workload.',
-    interventions: {
-      pharmacological: [
-        { title: 'ACE Inhibitors / ARBs / ARNIs', description: 'These classes are fundamental to blocking the RAAS cascade. They reduce vasoconstriction (afterload) and sodium/water retention (preload), leading to profound mortality benefits.' },
-        { title: 'Mineralocorticoid Receptor Antagonists (MRA - Spironolactone/Eplerenone)', description: 'Specifically blocks aldosterone\'s effects in the kidney, promoting diuresis and preventing cardiac fibrosis. **Scenario where they are harmful:** They can cause life-threatening hyperkalemia (high potassium). They are contraindicated in patients with significant renal impairment (e.g., eGFR < 30) or baseline high potassium (>5.0 mEq/L), and potassium levels must be monitored closely, especially when used with an ACEi/ARB.' },
-      ],
-      nonPharmacological: []
-    }
-  },
-  // ROW 5: Downstream consequences
-  {
-    id: 'inflammation',
-    label: ['Inflammation &', 'Oxidative Stress'],
-    x: 400, y: 520, width: 180, height: 60,
-    category: CategoryId.MALADAPTIVE_OUTCOME,
-    explanation: 'Neurohormonal activation is not just a hemodynamic issue. Angiotensin II and catecholamines are pro-inflammatory, stimulating the production of cytokines like TNF-alpha and IL-6. This, combined with tissue hypoperfusion, creates a state of systemic inflammation and oxidative stress, which further damages endothelial cells and cardiomyocytes, accelerating the process of adverse remodeling.',
-    interventions: {
-      pharmacological: [
-        { title: 'Statins', description: 'Beyond their lipid-lowering effects, statins have pleiotropic anti-inflammatory properties that may contribute to their benefit in patients with ischemic cardiomyopathy.' },
-        { title: 'SGLT2 Inhibitors', description: 'Part of their profound benefit is thought to stem from reducing oxidative stress and inflammation within the myocardium, in addition to their metabolic and hemodynamic effects.' }
-      ],
-      nonPharmacological: []
-    }
-  },
-   {
-    id: 'endothelial-dysfunction',
-    label: ['Endothelial', 'Dysfunction'],
-    x: 950, y: 520, width: 180, height: 60,
-    category: CategoryId.MALADAPTIVE_OUTCOME,
-    explanation: 'The endothelium, the inner lining of blood vessels, is an active organ. In heart failure, the combination of low flow states and high levels of angiotensin II and norepinephrine impairs its function. This leads to reduced production of the vasodilator nitric oxide and increased production of vasoconstrictors like endothelin-1, contributing to elevated systemic vascular resistance (afterload).',
-    interventions: {
-      pharmacological: [
-        { title: 'ACE Inhibitors / ARBs', description: 'By blocking Angiotensin II, these drugs improve endothelial function, helping to restore a more favorable balance of vasodilators and vasoconstrictors.' },
-      ],
-      nonPharmacological: [
-        { title: 'Exercise Training', description: 'Regular aerobic exercise is one of the most potent stimuli for improving endothelial function by increasing nitric oxide bioavailability.' },
-      ]
-    }
-  },
-
-  // ROW 6: Remodeling & Vicious Cycles
-  {
-    id: 'remodeling-fibrosis',
-    label: ['Myocardial Fibrosis', '& Hypertrophy'],
-    x: 100, y: 700, width: 180, height: 60,
-    category: CategoryId.MALADAPTIVE_OUTCOME,
-    explanation: 'In response to chronic pressure overload and neurohormonal stimulation, individual cardiomyocytes enlarge (hypertrophy) and fibroblasts deposit excess collagen (fibrosis). This makes the ventricular wall thick and stiff, impairing its ability to relax and fill (diastolic dysfunction). While initially a compensatory mechanism to normalize wall stress, it eventually becomes maladaptive, leading to a less compliant and inefficient heart.',
-    interventions: {
-      pharmacological: [
-        { title: 'MRAs (Spironolactone/Eplerenone)', description: 'Have a specific, well-documented effect on reducing myocardial fibrosis, which is a key part of their mortality benefit beyond their diuretic action.' },
-      ],
-      nonPharmacological: []
-    }
+    id: 'raas-activation',
+    label: ['Renin-Angiotensin-Aldosterone', 'System (RAAS) Activation', '• Angiotensin II → Vaso.', '• Aldosterone → Na+ & H₂O'],
+    x: 640, y: 450, width: 280, height: 110,
+    category: CategoryId.PROCESS,
+    explanation: 'The kidneys respond to low blood flow by activating the RAAS cascade. This leads to potent vasoconstriction and hormonal signals (aldosterone) that cause the body to retain salt and water, increasing blood volume. This maladaptive system is a primary target for medications like **ACE Inhibitors, ARBs, and Aldosterone Antagonists**.'
   },
   {
-    id: 'energy-starvation',
-    label: ['Myocardial Energy', 'Starvation'],
-    x: 700, y: 610, width: 180, height: 60,
-    category: CategoryId.MALADAPTIVE_OUTCOME,
-    explanation: 'The failing heart is metabolically inefficient. It shifts from using efficient fatty acids for fuel to less efficient glucose oxidation. Mitochondrial function is impaired, and the production of ATP (the cell\'s energy currency) cannot keep up with the demands of the chronically stressed myocardium. This energy deficit further weakens contractility and perpetuates a vicious cycle of pump failure.',
-     interventions: {
-      pharmacological: [
-        { title: 'SGLT2 inhibitors (Dapagliflozin/Empagliflozin)', description: 'A cornerstone therapy. Their benefit is multi-factorial, but one proposed mechanism is that they improve cardiac energetics by promoting a shift to more efficient fuel sources like ketone bodies, helping to alleviate the energy-starved state of the failing heart.' },
-      ],
-      nonPharmacological: []
-    }
+    id: 'increased-workload',
+    label: ['Increased Cardiac Workload,', 'Preload, and Afterload'],
+    x: 280, y: 600, width: 380, height: 70,
+    category: CategoryId.PROCESS,
+    explanation: 'The compensatory mechanisms lead to a vicious cycle. The heart must pump more blood (increased preload), against higher pressure (increased afterload), and at a faster rate (increased workload), causing further stress and damage.'
   },
   {
-    id: 'remodeling-dilation',
-    label: ['Ventricular Dilation', '& Arrhythmias'],
-    x: 1300, y: 700, width: 180, height: 60,
-    category: CategoryId.MALADAPTIVE_OUTCOME,
-    explanation: 'In response to chronic volume overload, the ventricle enlarges and becomes more spherical (dilation). This increases wall stress (Laplace\'s law), further impairing contractility. The stretched, fibrotic myocardium also becomes electrically unstable, creating circuits for re-entrant ventricular tachycardia and fibrillation, which are the primary causes of sudden cardiac death in this population.',
-     interventions: {
-      pharmacological: [
-         { title: 'Amiodarone', description: 'An antiarrhythmic drug used to suppress ventricular arrhythmias. It is often used in HF patients because it does not have the negative inotropic effects of many other antiarrhythmics. However, it has significant long-term toxicities (thyroid, lung, liver).' },
-      ],
-      nonPharmacological: [
-        { title: 'Implantable Cardioverter-Defibrillator (ICD)', description: 'A life-saving device for primary prevention of sudden cardiac death in patients with low ejection fraction (<35%). It does not treat heart failure but monitors the heart rhythm and delivers a shock to terminate a lethal arrhythmia.' },
-      ]
-    }
+    id: 'cardiac-remodeling',
+    label: ['Maladaptive Cardiac Remodeling', '(e.g., Hypertrophy, Dilation)'],
+    x: 280, y: 700, width: 380, height: 80,
+    category: CategoryId.PROCESS,
+    explanation: 'Over time, the chronic stress causes the heart muscle to change its size and shape in an attempt to compensate. This remodeling (e.g., thickening of walls, enlargement of chambers) ultimately disrupts normal function, stiffens the heart, and further impairs its pumping ability.'
   },
-
-  // ROW 7: Worsening HF
   {
     id: 'worsening-hf',
-    label: ['Progressive', 'Worsening of HF'],
-    x: 700, y: 790, width: 170, height: 60,
-    category: CategoryId.PATHOPHYSIOLOGY,
-    explanation: 'This represents the culmination of all the maladaptive processes. The self-perpetuating cycles of decreased output, neurohormonal activation, and adverse remodeling lead to an inexorable decline in cardiac function. The heart becomes progressively weaker and less responsive to standard therapies, marking the transition to advanced or end-stage heart failure.',
-    interventions: {
-      pharmacological: [
-        { title: 'Palliative Care Consultation', description: 'Focuses on improving quality of life by managing symptoms like pain, dyspnea, and anxiety, and facilitating discussions about goals of care and end-of-life planning.' }
-      ],
-      nonPharmacological: [
-        { title: 'LVAD / Heart Transplant', description: 'In eligible patients with end-stage disease, these are the definitive therapies. A Left Ventricular Assist Device (LVAD) is a mechanical pump that takes over the work of the left ventricle. A heart transplant replaces the failing heart. Both are major interventions reserved for the most severe cases.' },
-      ]
-    }
+    label: ['Progressive Worsening', 'of Pump Function'],
+    x: 280, y: 810, width: 380, height: 70,
+    category: CategoryId.PROCESS,
+    explanation: 'The ongoing cycle of injury, harmful compensation, and maladaptive remodeling leads to a steady decline in the heart\'s ability to function as an effective pump, leading to the clinical syndrome of heart failure.'
   },
-  // ROW 8: Symptoms
+
+  // Clinical Syndromes
   {
-    id: 'congestion',
-    label: ['Pulmonary &', 'Systemic Congestion'],
-    x: 450, y: 880, width: 170, height: 60,
-    category: CategoryId.SYMPTOMS,
-    explanation: 'This "backward failure" is caused by elevated filling pressures from volume overload. When the left ventricle fails, pressure backs up into the lungs (pulmonary congestion), causing fluid to leak into the alveoli. This leads to dyspnea (shortness of breath), orthopnea (breathlessness when lying flat), and paroxysmal nocturnal dyspnea. When the right ventricle fails, pressure backs up into the systemic circulation, causing peripheral edema (swollen legs), ascites (abdominal fluid), and hepatomegaly.',
-    interventions: {
-      pharmacological: [
-        { title: 'Loop Diuretics (Furosemide, Torsemide)', description: 'Essential for managing congestive symptoms by promoting renal excretion of salt and water, thereby reducing preload. They provide symptom relief but do not improve long-term mortality. **Scenario where they won\'t work:** In advanced HF, patients can develop "diuretic resistance" due to renal dysfunction and gut edema impairing oral absorption. This may require IV diuretics or combination therapy (e.g., adding a thiazide diuretic for sequential nephron blockade). Over-diuresis can cause dehydration and renal injury, paradoxically worsening RAAS activation.' },
-      ],
-      nonPharmacological: [
-        { title: 'Sodium & Fluid Restriction', description: 'A crucial self-management strategy. A low sodium diet (<2g/day) is fundamental. Fluid restriction (<1.5-2L/day) is often necessary in severe or hyponatremic HF. **Scenario where interventions fail:** If a patient is non-adherent to diet, diuretic efficacy will be severely blunted, leading to a cycle of dose escalation and potential side effects without symptom improvement.' },
-         { title: 'Daily Weight Monitoring', description: 'The single most important self-monitoring tool. A rapid gain of >3 lbs/1.5 kg in a day or >5 lbs/2.5 kg in a week signifies fluid retention and should prompt a call to their clinician, often for a pre-emptive diuretic dose adjustment.' },
-      ]
-    }
+    id: 'pulmonary-congestion',
+    label: ['Pulmonary Congestion', '(Left-Sided Failure)'],
+    x: 20, y: 920, width: 380, height: 70,
+    category: CategoryId.PROCESS,
+    explanation: 'When the left ventricle fails to pump blood forward to the body, it backs up into the pulmonary circulation. This increases pressure in the lung\'s blood vessels, causing fluid to leak into lung tissue and airspaces.'
   },
   {
-    id: 'low-output',
-    label: ['Low Output', 'Symptoms'],
-    x: 950, y: 880, width: 170, height: 60,
-    category: CategoryId.SYMPTOMS,
-    explanation: 'This "forward failure" results directly from the heart\'s inability to pump an adequate amount of oxygenated blood to the tissues. This leads to hypoperfusion of muscles and organs, causing profound fatigue, generalized weakness, and reduced exercise tolerance. In severe cases, it can lead to confusion or delirium (from poor brain perfusion) and cool, clammy extremities. These symptoms reflect a critical lack of metabolic supply to the body.',
-    interventions: {
-      pharmacological: [
-        { title: 'Optimizing Guideline-Directed Medical Therapy (GDMT)', description: 'There is no single "low output" drug for chronic HF. The goal is to maximize doses of the foundational four pillars (ARNI/ACEi/ARB, Beta-Blocker, MRA, SGLT2i) as tolerated. Over time, these drugs improve cardiac function and therefore cardiac output.' },
-      ],
-      nonPharmacological: [
-        { title: 'Cardiac Rehabilitation', description: 'A supervised exercise program helps improve peripheral muscle function and oxygen extraction, which can significantly improve exercise tolerance and quality of life even if central cardiac output doesn\'t change dramatically.' }
-      ]
-    }
+    id: 'systemic-congestion',
+    label: ['Systemic Venous Congestion', '(Right-Sided Failure)'],
+    x: 560, y: 920, width: 380, height: 70,
+    category: CategoryId.PROCESS,
+    explanation: 'When the right ventricle fails to pump blood forward to the lungs, it backs up in the systemic venous circulation. This is most commonly a consequence of chronic left-sided failure creating high pressure in the pulmonary circuit. Isolated right-sided failure, often due to lung disease, is termed *cor pulmonale*. The increased venous pressure leads to fluid accumulation in the body\'s tissues and organs.'
+  },
+
+  // Manifestations and Symptoms
+  {
+    id: 'left-sided-symptoms',
+    label: ['Left-Sided Manifestations:', '• Dyspnea & Crackles', '• Orthopnea', '• Paroxysmal Nocturnal Dyspnea'],
+    x: 20, y: 1050, width: 300, height: 120,
+    category: CategoryId.SIGNS_SYMPTOMS,
+    explanation: 'Classic symptoms resulting from pulmonary congestion. Includes shortness of breath (dyspnea), difficulty breathing when lying flat (orthopnea), and waking up at night gasping for air (PND).'
+  },
+  {
+    id: 'low-output-symptoms',
+    label: ['Low Output Symptoms:', '• Fatigue & Weakness', '• Cool Extremities'],
+    x: 340, y: 1050, width: 300, height: 120,
+    category: CategoryId.SIGNS_SYMPTOMS,
+    explanation: 'These symptoms are caused by the heart\'s inability to deliver adequate oxygenated blood to the muscles and other tissues, leading to a general feeling of tiredness and poor perfusion.'
+  },
+  {
+    id: 'right-sided-symptoms',
+    label: ['Right-Sided Manifestations:', '• Peripheral Edema', '• Jugular Venous Distension (JVD)', '• Hepatomegaly, Ascites'],
+    x: 660, y: 1050, width: 300, height: 120,
+    category: CategoryId.SIGNS_SYMPTOMS,
+    explanation: 'Hallmark signs of systemic fluid overload. Includes swelling in the legs/ankles (edema), visible bulging of neck veins (JVD), and fluid accumulation in the liver and abdomen.'
+  },
+  
+  {
+    id: 'clinical-syndrome',
+    label: ['Clinical Syndrome of', 'Heart Failure'],
+    x: 280, y: 1210, width: 380, height: 70,
+    category: CategoryId.PROCESS,
+    explanation: 'The combination of left-sided, right-sided, and low-output signs and symptoms constitutes the clinical presentation of heart failure, which prompts therapeutic intervention.'
+  },
+
+  // Management
+  {
+    id: 'non-pharmacological-management',
+    label: ['Non-Pharmacological Mgt.', '• Dietary Modification', '• Activity and Exercise', '• Weight Management', '• Lifestyle / Risk Control', '• Patient Education'],
+    x: 280, y: 1320, width: 380, height: 160,
+    category: CategoryId.NON_PHARM_MANAGEMENT,
+    explanation: 'Cornerstone interventions that empower the patient and are essential for long-term success. They work in tandem with medications to reduce symptoms and prevent progression.\n\n**• Dietary Modification:** A low-sodium diet reduces water retention, which decreases blood volume (preload) and eases symptoms of congestion. Fluid restriction may be needed in severe cases.\n\n**• Activity and Exercise:** Graded, regular exercise improves cardiovascular efficiency and functional capacity. Rest periods are crucial to conserve energy and prevent overexertion.\n\n**• Weight Management:** Daily weight monitoring is vital to detect early signs of fluid retention. Maintaining an ideal body weight reduces the overall workload on the heart.\n\n**• Lifestyle Control:** Smoking cessation improves oxygenation and reduces vasoconstriction. Limiting alcohol prevents further heart muscle damage.\n\n**• Education:** Teaching patients and families to monitor symptoms, adhere to treatments, and recognize when to seek help is critical for self-management and reducing hospitalizations.'
+  },
+  {
+    id: 'pharmacological-management',
+    label: ['Pharmacological Management', '• Reduce Preload/Symptoms', '• Block RAAS & SNS Activation', '• Address Comorbidities'],
+    x: 280, y: 1510, width: 380, height: 160,
+    category: CategoryId.MANAGEMENT,
+    explanation: 'Treatment targets the vicious cycle of heart failure. Each medication class interrupts a specific step:\n\n**1. Reduce Fluid Overload (Preload):**\n• **Diuretics (e.g., Furosemide/Lasix):** Remove excess salt and water to decrease blood volume, relieving congestion (pulmonary & systemic edema).\n\n**2. Block Neurohormonal Activation:**\n• **ACE Inhibitors (e.g., Enalapril) & ARBs (e.g., Losartan):** Cornerstones of therapy that block the RAAS system. This relaxes blood vessels (reducing afterload) and prevents fluid retention, helping to reverse harmful cardiac remodeling.\n• **Beta-blockers (e.g., Metoprolol):** Block the SNS, slowing the heart rate, lowering blood pressure, and reducing the heart\'s workload and oxygen demand.\n• **Aldosterone Antagonists (e.g., Spironolactone):** Blocks aldosterone (part of RAAS) to reduce fluid retention and prevent cardiac fibrosis.\n\n**3. Other Key Medications:**\n• **SGLT2 Inhibitors (e.g., Dapagliflozin):** Help remove glucose and fluid via urine, reducing preload and having protective effects on the heart and kidneys.\n• **Inotropes (e.g., Digoxin):** Used in select cases to increase the heart\'s pumping strength.'
+  },
+  // Outcomes
+  {
+    id: 'positive-outcomes',
+    label: ['Positive Outcomes', '(Goals of Therapy)', '• Symptom Control', '• Improved Quality of Life', '• Reduced Hospitalizations'],
+    x: 280, y: 1720, width: 380, height: 120,
+    category: CategoryId.POSITIVE_OUTCOMES,
+    explanation: 'Effective management aims to halt the progression of heart failure. By targeting the underlying mechanisms, treatments can significantly reduce symptoms, decrease the frequency of hospital admissions for acute decompensation, improve the patient\'s ability to perform daily activities, and ultimately prolong survival.'
+  },
+  {
+    id: 'end-stage-hf',
+    label: ['Progression to', 'End-Stage HF', '• Refractory Symptoms', '• Palliative Care', '• Advanced Therapies'],
+    x: 280, y: 1900, width: 380, height: 120,
+    category: CategoryId.NEGATIVE_OUTCOMES,
+    explanation: 'Despite optimal medical therapy, heart failure can progress to an advanced stage where symptoms are severe and persistent at rest. At this point, the focus of care may shift towards palliative measures to manage symptoms and improve comfort, or considering advanced therapies such as heart transplantation or mechanical circulatory support (e.g., LVAD) for eligible candidates.'
   }
 ];
 
 export const DIAGRAM_CONNECTIONS: DiagramConnection[] = [
-  // Risk -> Injury
-  { from: 'non-modifiable-rf', to: 'initial-injury' },
-  { from: 'modifiable-rf', to: 'initial-injury' },
-  
-  // Injury -> CO
-  { from: 'initial-injury', to: 'decreased-co' },
-  
-  // CO -> Compensatory Systems
+  { from: 'predisposing-factors', to: 'myocardial-injury' },
+  { from: 'precipitating-factors', to: 'myocardial-injury' },
+  { from: 'myocardial-injury', to: 'decreased-co' },
   { from: 'decreased-co', to: 'sns-activation' },
-  { from: 'decreased-co', to: 'raas-adh-activation' },
-  { from: 'decreased-co', to: 'natriuretic-peptides' },
-  
-  // Counter-regulatory dashed lines
-  { from: 'natriuretic-peptides', to: 'sns-activation', lineStyle: 'dashed' },
-  { from: 'natriuretic-peptides', to: 'raas-adh-activation', lineStyle: 'dashed' },
-
-  // Compensatory -> Downstream Consequences
-  { from: 'sns-activation', to: 'inflammation' },
-  { from: 'raas-adh-activation', to: 'inflammation' },
-  { from: 'raas-adh-activation', to: 'endothelial-dysfunction' },
-  { from: 'sns-activation', to: 'endothelial-dysfunction' },
-  
-  // Downstream Consequences & Direct Neurohormonal -> Remodeling
-  { from: 'inflammation', to: 'remodeling-fibrosis' },
-  { from: 'sns-activation', to: 'remodeling-fibrosis' },
-  { from: 'raas-adh-activation', to: 'remodeling-fibrosis' },
-  
-  { from: 'endothelial-dysfunction', to: 'remodeling-dilation' },
-  { from: 'raas-adh-activation', to: 'remodeling-dilation' },
-
-  // Vicious Cycles (Remodeling -> Worsening CO)
-  { from: 'remodeling-fibrosis', to: 'decreased-co', type: 'feedback' },
-  { from: 'remodeling-dilation', to: 'decreased-co', type: 'feedback' },
-  { from: 'energy-starvation', to: 'decreased-co', type: 'feedback' },
-
-  // Remodeling -> Other outcomes
-  { from: 'remodeling-fibrosis', to: 'energy-starvation' },
-  { from: 'remodeling-dilation', to: 'energy-starvation' },
-  
-  { from: 'remodeling-dilation', to: 'worsening-hf' }, // Dilation and arrhythmia is a late-stage event
-  { from: 'remodeling-fibrosis', to: 'remodeling-dilation' }, // Fibrosis leads to stiffer but eventually dilating heart
-  
-  // Worsening HF -> Symptoms
-  { from: 'worsening-hf', to: 'congestion' },
-  { from: 'worsening-hf', to: 'low-output' },
-
+  { from: 'decreased-co', to: 'raas-activation' },
+  { from: 'decreased-co', to: 'frank-starling-mechanism' },
+  { from: 'sns-activation', to: 'increased-workload' },
+  { from: 'raas-activation', to: 'increased-workload' },
+  { from: 'frank-starling-mechanism', to: 'increased-workload' },
+  { from: 'increased-workload', to: 'cardiac-remodeling' },
+  { from: 'cardiac-remodeling', to: 'worsening-hf' },
+  { from: 'cardiac-remodeling', to: 'decreased-co', lineStyle: 'dashed' },
+  { from: 'worsening-hf', to: 'pulmonary-congestion' },
+  { from: 'worsening-hf', to: 'low-output-symptoms' },
+  { from: 'pulmonary-congestion', to: 'left-sided-symptoms' },
+  { from: 'pulmonary-congestion', to: 'systemic-congestion' },
+  { from: 'systemic-congestion', to: 'right-sided-symptoms' },
+  { from: 'left-sided-symptoms', to: 'clinical-syndrome' },
+  { from: 'right-sided-symptoms', to: 'clinical-syndrome' },
+  { from: 'low-output-symptoms', to: 'clinical-syndrome' },
+  { from: 'clinical-syndrome', to: 'non-pharmacological-management' },
+  { from: 'clinical-syndrome', to: 'pharmacological-management' },
+  { from: 'pharmacological-management', to: 'positive-outcomes' },
+  { from: 'non-pharmacological-management', to: 'positive-outcomes' },
+  { from: 'worsening-hf', to: 'end-stage-hf', lineStyle: 'dashed' },
 ];

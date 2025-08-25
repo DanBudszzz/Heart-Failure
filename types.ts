@@ -1,40 +1,28 @@
-
 export enum CategoryId {
-  RISK_FACTORS = 'risk-factors',
-  INITIAL_INJURY = 'initial-injury',
-  PATHOPHYSIOLOGY = 'pathophysiology',
-  COMPENSATORY_MECHANISM = 'compensatory-mechanism',
-  COUNTER_REGULATORY = 'counter-regulatory',
-  MALADAPTIVE_OUTCOME = 'maladaptive-outcome',
-  SYMPTOMS = 'symptoms'
-}
-
-export interface Intervention {
-  title: string;
-  description: string;
+  FACTORS = 'factors',
+  PROCESS = 'process',
+  SIGNS_SYMPTOMS = 'signs-symptoms',
+  MANAGEMENT = 'management',
+  NON_PHARM_MANAGEMENT = 'non-pharm-management',
+  POSITIVE_OUTCOMES = 'positive-outcomes',
+  NEGATIVE_OUTCOMES = 'negative-outcomes',
 }
 
 export interface DiagramNode {
   id: string;
   label: string[];
-  examples?: string[];
   x: number;
   y: number;
   width: number;
   height: number;
   category: CategoryId;
   explanation: string;
-  interventions: {
-    pharmacological: Intervention[];
-    nonPharmacological: Intervention[];
-  };
 }
 
 export interface DiagramConnection {
   from: string;
   to: string;
   lineStyle?: 'solid' | 'dashed';
-  type?: 'primary' | 'feedback';
 }
 
 export interface Category {

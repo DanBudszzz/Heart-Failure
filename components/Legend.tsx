@@ -1,4 +1,3 @@
-
 import React from 'react';
 import type { Category } from '../types';
 
@@ -13,15 +12,15 @@ const Legend: React.FC<LegendProps> = ({ categories }) => {
       <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
         {categories.map(category => (
           <div key={category.id} className="flex items-center" aria-label={`Legend item: ${category.name}`}>
-            <span className={`w-4 h-4 rounded-full mr-2 shrink-0 ${category.color}`}></span>
+            <span className={`w-4 h-4 rounded-md mr-2 shrink-0 ${category.color} ${category.color === 'bg-white' ? 'border border-slate-300' : ''}`}></span>
             <span className="text-sm text-slate-600">{category.name}</span>
           </div>
         ))}
-         <div className="flex items-center" aria-label="Legend item: Vicious Cycle / Feedback Loop">
+         <div className="flex items-center" aria-label="Legend item: Feedback or Effect">
             <svg width="24" height="16" viewBox="0 0 24 16" className="mr-2 shrink-0">
-                <path d="M 4 8 C 12 0, 12 16, 20 8" stroke="#f97316" strokeWidth="2" fill="none" />
+                <path d="M 2 8 L 22 8" stroke="#64748b" strokeWidth="2" strokeDasharray="4 2" fill="none" />
             </svg>
-            <span className="text-sm text-slate-600">Feedback Loop</span>
+            <span className="text-sm text-slate-600">Feedback / Effect</span>
           </div>
       </div>
     </div>
